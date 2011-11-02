@@ -13,7 +13,6 @@ from foobnix.version import FOOBNIX_VERSION
 from dbus.mainloop.glib import DBusGMainLoop
 from foobnix.regui.model.signal import FControl
 from foobnix.regui.service.path_service import get_foobnix_resourse_path_by_name
-from foobnix.thirdparty.sound_menu import SoundMenuControls
 from foobnix.util.const import STATE_PLAY, ICON_FOOBNIX
 
 DBusGMainLoop(set_as_default=True)
@@ -41,16 +40,7 @@ class DBusManager(dbus.service.Object, FControl):
             mm_object.GrabMediaPlayerKeys("MyMultimediaThingy", 0, dbus_interface=dbus_interface)
             mm_object.connect_to_signal('MediaPlayerKeyPressed', self.on_mediakey)
             #mm_object.ReleaseMediaPlayerKeys("MyMultimediaThingy", dbus_interface=dbus_interface)
-
-            self.sound_menu = SoundMenuControls("foobnix")
-            self.sound_menu._sound_menu_next = self._sound_menu_next
-            self.sound_menu._sound_menu_previous = self._sound_menu_previous
-            self.sound_menu._sound_menu_is_playing = self._sound_menu_is_playing
-            self.sound_menu._sound_menu_play = self._sound_menu_play
-            self.sound_menu._sound_menu_pause = self._sound_menu_pause
-            self.sound_menu._sound_menu_raise = self._sound_menu_raise
         except Exception, e:
-            self.sound_menu = None
             logging.error("DBUS Initialization Error" + str(e))
 
     def _sound_menu_next(self):
@@ -72,21 +62,16 @@ class DBusManager(dbus.service.Object, FControl):
         gobject.idle_add(self.controls.main_window.show)
 
     def _set_state_play(self):
-        if self.sound_menu:
-            self.sound_menu.signal_playing()
+	pass
 
     def _set_state_pause(self):
-        if self.sound_menu:
-            self.sound_menu.signal_paused()
+	pass
 
     def _set_state_stop(self):
-        if self.sound_menu:
-            self.sound_menu.signal_stopped()
+	pass
 
     def _update_info(self, bean):
         if not bean:
-            return
-        if not self.sound_menu:     # if dbus initialization can't be finished
             return
         image = "file:///" + get_foobnix_resourse_path_by_name(ICON_FOOBNIX)
         if bean.image:
@@ -97,10 +82,6 @@ class DBusManager(dbus.service.Object, FControl):
         artists = None
         if bean.artist:
             artists = [bean.artist]
-        self.sound_menu.song_changed(artists=artists,
-                                     title=bean.title or bean.text,
-                                     album=bean.album,
-                                     cover=image)
     
     def check_for_commands(self, args):
         if len(args) == 1:

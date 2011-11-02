@@ -10,9 +10,9 @@ import os
 import re
 import logging
 
-from foobnix.thirdparty.mutagen.mp4 import MP4
-from foobnix.thirdparty.mutagen.id3 import ID3
-from foobnix.thirdparty.mutagen.flac import FLAC
+from mutagen.mp4 import MP4
+from mutagen.id3 import ID3
+from mutagen.flac import FLAC
 from foobnix.fc.fc import FC, FCache
 from foobnix.fc.fc_cache import COVERS_DIR
 from foobnix.util.image_util import get_image_by_path

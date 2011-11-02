@@ -23,7 +23,7 @@ from foobnix.util.const import FTYPE_NOT_UPDATE_INFO_PANEL, \
     LEFT_PERSPECTIVE_INFO, ICON_BLANK_DISK, SITE_LOCALE
 from foobnix.util.bean_utils import update_parent_for_beans, \
     update_bean_from_normalized_text
-from foobnix.thirdparty.lyr import get_lyrics
+from lyricwiki import get_lyrics
 from foobnix.regui.service.lyrics_parsing_service import get_lyrics_by_parsing
 
 

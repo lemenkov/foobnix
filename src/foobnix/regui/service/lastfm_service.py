@@ -15,9 +15,9 @@ from foobnix.fc.fc_base import FCBase
 from foobnix.regui.model import FModel
 from foobnix.util.const import FTYPE_VIDEO
 from foobnix.util.file_utils import file_extension
-from foobnix.thirdparty.google.translate import translate
-from foobnix.thirdparty.pylast import WSError, Tag
-from foobnix.thirdparty import pylast
+from xgoogle import translate
+from pylast import WSError, Tag
+import pylast
 
 API_KEY = FCBase().API_KEY
 API_SECRET = FCBase().API_SECRET
